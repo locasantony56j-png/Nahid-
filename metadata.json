@@ -1,0 +1,5 @@
+{
+  "name": "NB Health Care",
+  "description": "A futuristic medical and educational platform for students in Bangladesh, featuring medicine search, medical dictionary, and study tools.",
+  "requestFramePermissions": ["camera"]
+}

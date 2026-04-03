@@ -1,0 +1,54 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Stores user preferences and role information.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "email": { "type": "string", "description": "User email" },
+        "role": { "type": "string", "enum": ["admin", "user"], "description": "User role" },
+        "darkMode": { "type": "boolean", "description": "User preference for dark mode" },
+        "language": { "type": "string", "enum": ["en", "bn"], "description": "User preferred language" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Bookmark": {
+      "title": "Bookmark",
+      "description": "A saved medical term or medicine.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "UID of the user who saved it" },
+        "itemId": { "type": "string", "description": "ID of the medicine or dictionary term" },
+        "type": { "type": "string", "enum": ["medicine", "dictionary", "disease"], "description": "Type of item bookmarked" },
+        "savedAt": { "type": "string", "format": "date-time", "description": "Timestamp when saved" }
+      },
+      "required": ["userId", "itemId", "type"]
+    },
+    "Screenshot": {
+      "title": "Screenshot",
+      "description": "Metadata for a captured screenshot.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "UID of the user" },
+        "imageUrl": { "type": "string", "description": "Base64 or URL of the screenshot" },
+        "timestamp": { "type": "string", "format": "date-time", "description": "When it was taken" }
+      },
+      "required": ["userId", "imageUrl"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents"
+    },
+    "/bookmarks/{bookmarkId}": {
+      "schema": "Bookmark",
+      "description": "User bookmarks"
+    },
+    "/screenshots/{screenshotId}": {
+      "schema": "Screenshot",
+      "description": "User screenshots"
+    }
+  }
+}
